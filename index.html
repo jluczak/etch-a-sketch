@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>---   Etch-A-Sketch   ---</h1>
+    <div class="container">
+    </div>
+    <button class="btn">Create new grid</button>
+  </body>
+</html>
+
+<script>
+const container = document.querySelector(".container")
+const buttonCreate = document.querySelector(".btn")
+buttonCreate.addEventListener("click", function( event ) {
+  size = prompt("Which size would you like your grid to be?");
+  gridDisplay(size);
+})
+
+function gridDisplay(size) {
+  clearGrid();
+  createSquares (size);
+
+}
+function createSquares (size){
+  for (let i=0; i<size**2;i++){
+    const square = document.createElement("div")
+    addAttributes(square);
+  }
+}
+function addAttributes(square){
+  square.classList.add("square")
+  square.style.height = "" + (640/size)-2 + "px";
+  square.style.width = "" + (640/size-2) + "px";
+  container.appendChild(square)
+  square.addEventListener("mouseover", function( event ){
+    changeColor(event);
+  } )
+}
+function clearGrid(){
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+}
+function changeColor(event){
+  event.target.style.backgroundColor = 'rgb(' +
+    Math.random()*255 + ',' + Math.random()*255 + ',' +
+    Math.random()*255 + ')';
+}
+
+</script>
